@@ -1,0 +1,8 @@
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Helpers\bin\Debug\netstandard2.0\Funding.Helpers.deps.json
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Helpers\bin\Debug\netstandard2.0\Funding.Helpers.dll
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Helpers\bin\Debug\netstandard2.0\Funding.Helpers.pdb
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Helpers\obj\Debug\netstandard2.0\Funding.Helpers.csproj.CoreCompileInputs.cache
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Helpers\obj\Debug\netstandard2.0\Funding.Helpers.AssemblyInfoInputs.cache
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Helpers\obj\Debug\netstandard2.0\Funding.Helpers.AssemblyInfo.cs
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Helpers\obj\Debug\netstandard2.0\Funding.Helpers.dll
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Helpers\obj\Debug\netstandard2.0\Funding.Helpers.pdb

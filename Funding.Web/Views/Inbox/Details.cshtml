@@ -1,0 +1,21 @@
+﻿@model AllMessagesViewModel
+@{
+    ViewData["Title"] = $"Message {Model.Title}";
+}
+<a asp-controller="Inbox" asp-action="All" class="btn btn-info" role="button">Back</a>
+@if (Model.Title == Guard.Title)
+{
+    <h2 class="text-danger">This message does not exist</h2>
+}
+else
+{
+    <div class="well well-lg">
+        <p style="font-style:italic">From: @Model.Receiver.UserName</p>
+        <p>Subject: @Model.Title</p><br />
+
+        <p>@Model.Content</p>
+        <br />
+        <small>Sent on: @Model.SentDate.ToShortDateString()</small>
+        <a asp-controller="Inbox" asp-action="Reply" class="btn btn-primary" role="button" asp-route-userName="@Model.Sender.UserName">Reply</a>
+    </div>
+}

@@ -1,0 +1,72 @@
+﻿@model ProjectsListingHomeViewModel
+@{
+    ViewData["Title"] = "Discover";
+    var color = "red";
+}
+
+@inject IProjectService service
+@inject UserManager<User> userManager
+<h2 class="text-success" style="text-align:center;">@TempData["addedProject"] </h2>
+@if (Model.Projects.Count() != 0)
+{
+    <div class="col-md-12">
+
+        @foreach (var project in Model.Projects)
+        {
+            <div class="col-md-4" id="exploreMenu">
+                <div style="text-align:center;">
+                    <a asp-controller="Project" asp-action="Details" asp-route-projectId="@project.Id">
+                        @if (service.IsImageUrl(project.ImageUrl))
+                        {
+
+                            <img border="0" id="imageProfile" src="@project.ImageUrl" class="expand2" />
+                        }
+                        else
+                        {
+                            <img border="0" id="imageProfile" src="~/images/no.jpg" class="expand2" />
+
+                        }
+                    </a>
+                    <h3>@project.Name</h3>
+                    <h6>Goal: &#8364;@String.Format("{0:n}", project.Goal)</h6>
+                    @if (project.Goal <= project.MoneyCollected)
+                    {
+                        color = "lawngreen";
+                    }
+
+                    <h6 style="color:@color">Collected so far: &#8364 @String.Format("{0:n}", project.MoneyCollected)</h6>                   
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row">
+        <ul class="pagination">
+            <li class="page-item">
+                <a @Model.Previous asp-controller="Project" asp-action="Index" asp-route-page="@(Model.Page-1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.NumberOfPages; i++)
+            {
+                <li class="page-item @(Model.Page == i ? "active" : string.Empty)">
+                    <a class="page-link @(Model.Page == i ? "disabled" : string.Empty)" asp-controller="Project" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+            <li class="page-item">
+                <a @Model.Next asp-controller="Project" asp-action="Index" asp-route-page="@(Model.Page+1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+        @section Scripts {
+            @await Html.PartialAsync("_ValidationScriptsPartial")
+        }
+    </div>
+}
+else
+{
+    <h1 class="text-info">No projects so far</h1>
+}

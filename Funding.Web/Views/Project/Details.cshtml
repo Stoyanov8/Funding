@@ -1,0 +1,128 @@
+﻿@model DetailsProjectModel
+
+<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+@{
+    ViewData["Title"] = "Details";
+    decimal progressN = 0.00m;
+    if (Model.MoneyCollected != 0.00m)
+    {
+        progressN = (Model.MoneyCollected / Model.Goal) * 100;
+    }
+    string progress = string.Format("{0:0.00}", progressN) + "%";
+
+}
+
+@inject IProjectService service
+@await Html.PartialAsync("_BackButton")
+
+<h3 class="text-danger">@TempData[ProjectConst.TempDataSorry]</h3>
+<h3 class="text-success">@TempData[ProjectConst.TempDataDonated]</h3>
+<h3 class="text-info">@TempData[ProjectConst.TempDataDeletedComment]</h3>
+<div class="container">
+    <div>
+        <h1 id="projectName">@Model.Name</h1>
+        <hr />
+    </div>
+    <div class="modal-body row">
+        <div class="col-md-6" id="projectImage">
+
+            @if (service.IsImageUrl(Model.ImageUrl))
+            {
+
+                <img border="0" id="imageProfile" src="@Model.ImageUrl" class="expand" />
+            }
+            else
+            {
+                <img border="0" id="imageProfile" src="~/images/no.jpg" class="expand" />
+
+            }
+
+            <div id="projectImage">
+                <label>
+                    Project Start Date : @Model.StartDate.ToShortDateString()
+                </label>
+                <br />
+                <label>
+                    Project End Date : @Model.EndDate.ToShortDateString()
+                </label>
+                <hr />
+                <div id="projectDonation">
+                    <h2>Support this project</h2>
+                    <h4>Money needed &#8364; @String.Format("{0:n}", @Model.Goal)</h4>
+                    <h6>Progress:</h6>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success donationBar"
+                             role="progressbar" aria-valuenow=@progress
+                             aria-valuemin="0" aria-valuemax="100"
+                             style="width:@progress">
+                            @progress
+                        </div>
+                    </div>
+                    @if (Model.Backers != 0)
+                    {
+                        <p id="donationL">@Model.Backers @(Model.Backers > 1 ? "people have" : "person has") already donated!</p>
+                    }
+                    else
+                    {
+                        <p id="donationL">Be the first to make a donation</p>
+                    }
+                    <a id="donateButton" class="btn btn-info" asp-controller="Project"
+                       asp-action="Donate" asp-route-projectId="@Model.Id" asp-route-returnUrl="">
+                        Donate
+                    </a>
+                </div>
+                <hr />
+                <br />
+                <i style="color:white">
+                    Project by : @Model.CreatorName
+                </i>
+                <div class="tags">
+                    <p style="color:cornflowerblue">
+                        <em style="color:aliceblue">
+                            Project tags:
+                        </em>
+                        @string.Join(",", @Model.Tags.Select(x => x.Name))
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div id="projectDescription">
+                <text>
+                    @Model.Description
+                </text>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+<form asp-controller="Project" asp-action="AddComment" method="get" asp-route-Id=@Model.Id asp-route-NewComment="@Model.NewComment" id="usrform">
+
+    <br>
+    <textarea asp-for="@Model.NewComment" rows="4" cols="100" style="resize:none" placeholder="Write a comment.."></textarea><br />
+    <input type="submit">
+</form>
+@if (Model.Comments.Count == 0)
+{
+    <h6>Be the first to make a comment !</h6>
+}
+else
+{
+    foreach (var comment in Model.Comments)
+    {
+        <div class="well well-lg">
+            <p>From: <em>@comment.User </em></p>
+
+            <p> @comment.Content </p>
+            <small>Sent on: @comment.SentDate.ToString("H:mm:ss - dd/MM/yy")</small>
+            @if (this.User.IsInRole(Roles.Admin) || this.User.IsInRole(Roles.ProjectAdmin) || this.User.Identity.Name == comment.User)
+            {
+                <a asp-controller="Project" asp-action="DeleteComment" asp-route-Id=@comment.Id asp-route-projectId =@Model.Id class="btn btn-warning">
+                    Delete
+                </a>
+            }
+        </div>
+    }
+}

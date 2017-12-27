@@ -1,0 +1,221 @@
+﻿body {
+    padding-top: 50px;
+    background-image: url("../images/background6.png");
+    background-repeat: repeat;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+
+.navbar {
+    background-color: white;
+}
+
+#register, #login, #logout {
+    color: white;
+    border-style: solid;
+    border-width: medium;
+    border-radius: 30px;
+}
+
+#login {
+    background-color: yellowgreen;
+}
+
+#register {
+    background-color: forestgreen;
+    margin-right: 4px;
+}
+
+#logout {
+    background-color: darkred;
+    margin-right: 4px;
+}
+
+#mailIcon {
+    padding-top: 5px;
+    padding-right: 15px;
+}
+
+.buttonsHome {
+    padding-left: 500px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+buttonsHome #donateButton {
+    position: absolute;
+    height: 200px;
+    width: 400px;
+    margin: -100px 0 0 -200px;
+    top: 50%;
+    left: 50%;
+}
+
+#addHome, #exploreHome {
+    border-width: medium;
+    border-width: medium;
+    border-radius: 30px;
+    height: 50px;
+    font-size: 25px;
+}
+
+#orHome {
+    color: white;
+    padding-left: 110px;
+    margin-bottom: 10px;
+    padding-top: 100px;
+}
+
+.adminPanel {
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+.dropbtn {
+    border: none;
+    cursor: pointer;
+}
+
+.adminBody {
+    color: lightgrey;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6, label {
+    color: navajowhite;
+}
+
+#addProject {
+    padding-left: 400px;
+    text-align: center;
+}
+
+#addProjectDiv {
+    border: 5px solid red;
+}
+
+#projectName {
+    text-align: center;
+    margin-top: 1px;
+    font-family: 'Cinzel', serif;
+}
+
+img.expand {
+    width: 38em;
+}
+
+img.expand2 {
+    width: 15em;
+    height: 11em;
+}
+
+    img.expand2:hover {
+        opacity: 0.4;
+        filter: alpha(opacity=50);
+    }
+
+#projectDescription text {
+    font-size: 20px;
+    color: #4B0082;
+    word-wrap: break-word;
+}
+
+.donationBar {
+    color: black;
+}
+
+#donationL {
+    color: azure;
+}
+
+#searchSide {
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+#exploreMenu {
+    border: solid 5px snow;
+}
+
+#gnom {
+    top: 50%;
+    left: 50%;
+}
+
+.searchAndProjects {
+    display: inline-block;
+    padding-right: 100px;
+}
+.searchBar {
+    display: inline-block;
+    right:50px;
+    white-space: nowrap;
+}
+#projectReadyCheck {
+    width: 1em;
+}
+
+#projectsAndSearchNav {
+    padding-top: 10px;
+}

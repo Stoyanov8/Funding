@@ -1,0 +1,19 @@
+﻿@model DonateViewModel
+
+<div class="row" id="donateView">
+    <div class="col-md-8">
+        <form  method="post">
+            <div class="form-group">
+                <label asp-for="Amount"></label>
+                <input asp-for="Amount" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message"></label>
+                <textarea asp-for="Message" class="form-control" rows="4" style="resize:none;"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Make donation</button>
+        </form>
+    </div>
+</div>

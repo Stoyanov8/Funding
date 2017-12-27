@@ -1,0 +1,27 @@
+﻿@model SendMessageViewModel
+@{
+    ViewData["Title"] = "Send Message";
+}
+
+<h2>Write a message</h2>
+<form method="post">
+    <div class="form-group" style="width:250px">
+        <label asp-for="ReceiverName"></label>
+        <input asp-for="ReceiverName" class="form-control" />
+        <span class="text-danger">@TempData[UserConst.TempDataError]</span>
+        <span asp-validation-for="ReceiverName" class="text-danger"></span>
+    </div>
+    <div class="form-group" style="width:300px">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group" style="position:relative">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" rows="5"  class="form-control" style="resize:none;"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Send</button>
+    </div>
+</form>

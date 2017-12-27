@@ -1,0 +1,44 @@
+﻿@model MessagesListViewModel
+@{
+    ViewData["Title"] = "All Messages";
+    var color = "slategray";
+}
+
+<div class="container">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @await Html.PartialAsync("_InboxPartial")
+            </ul>
+        </div>
+    </div>
+
+    @if (Model.Messages.Count() == 0)
+    {
+        <h2 class="text-warning">You don't have any messages</h2>
+    }
+    else
+    {
+        <h2>Your messages</h2>
+        @foreach (var message in Model.Messages)
+        {
+            if (message.isRead == true)
+            {
+                color = "azure";
+            }
+
+            <div class="well well-lg" style="background-color:@color">
+                <p style="font-style:italic">From: @message.Receiver.UserName</p>
+                <p>Subject: @message.Title</p><br />
+
+                <p>@(message.Content.Length >= 140 ? message.Content.Substring(0, 140) + ".." : message.Content)</p>
+                <br />
+                <small>Sent on: @message.SentDate.ToString("H:mm:ss - dd/MM/yy")</small>
+                <a asp-controller="Inbox" asp-action="Details" class="btn btn-success" role="button" asp-route-messageId="@message.Id">Details</a>
+                <a asp-controller="Inbox" asp-action="Reply" class="btn btn-primary" role="button" asp-route-userName="@message.Receiver.UserName">Reply</a>
+                <a asp-controller="Inbox" asp-action="DeleteFromMine" class="btn btn-danger" role="button" asp-route-messageId="@message.Id">Delete</a>
+            </div>
+        }
+        @await Html.PartialAsync("_PaginationInbox", Model)
+    }
+</div>

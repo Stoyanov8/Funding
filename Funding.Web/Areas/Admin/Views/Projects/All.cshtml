@@ -1,0 +1,83 @@
+﻿@model AdminProjectListingViewModel
+@{
+    ViewData["Title"] = "Projects";
+
+}@await Html.PartialAsync("_AdminButtons")
+<h2 style="padding-right:500px;">All projects</h2>
+
+<h2>@TempData["message"]</h2>
+@if (Model.Projects.Count() == 0)
+{
+    <h2 class="text-warning">No projects yet </h2>
+}
+else
+{
+    <div>
+        <h1 class="text-success">@TempData["result"] </h1>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Goal</th>
+                    <th>Image</th>
+                    <th>Money collected</th>
+                    <th>Creator</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in Model.Projects)
+                {
+                    <tr class="table-active">
+                        <td>@(project.Name.Count() > 10 ? project.Name.Substring(0, 10) + ".." : project.Name) </td>
+                        <td>@(project.Description.Count() > 10 ? project.Description.Substring(0, 10) + ".." : project.Description) </td>
+                        <td>@project.StartDate</td>
+                        <td>@project.EndDate</td>
+                        <td>@project.Goal</td>
+                        <td>@(project.ImageUrl.Count() > 10 ? project.ImageUrl.Substring(0, 10) + ".." : project.ImageUrl) </td>
+                        <td>@project.MoneyCollected</td>
+                        <td>@project.Creator.FirstName @project.Creator.LastName</td>
+                        <td><a asp-area=""  asp-controller="Project" asp-action="Details" asp-route-projectId="@project.Id" class="btn btn-info">Details</a></td>
+                        @if (!project.isApproved)
+                        {
+                            <td><a asp-controller="Projects" asp-action="ApproveOrDissaprove" asp-route-projectId="@project.Id" asp-route-approved=@true class="btn btn-success">Approve</a></td>
+                            <td><a asp-controller="Projects" asp-action="ApproveOrDissaprove" asp-route-projectId="@project.Id" asp-route-approved=@false class="btn btn-danger">Do not Approve</a></td>
+                        }
+                        @if (project.isApproved)
+                        {
+                            <td><a asp-controller="Projects" asp-action="Delete" asp-route-projectId="@project.Id" asp-route-projectId=@project.Id class="btn btn-danger">Delete</a></td>
+
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <ul class="pagination">
+            <li class="page-item">
+                <a @Model.Previous asp-controller="Users" asp-action="All" asp-route-page="@(Model.Page-1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.NumberOfPages; i++)
+                {
+                <li class="page-item @(Model.Page == i ? "active" : string.Empty)">
+                    <a class="page-link @(Model.Page == i ? "disabled" : string.Empty)" asp-controller="Projects" asp-action="All" asp-route-page="@i">@i</a>
+                </li>
+            }
+            <li class="page-item">
+                <a @Model.Next asp-controller="Projects" asp-action="All" asp-route-page="@(Model.Page+1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+        @section Scripts {
+            @await Html.PartialAsync("_ValidationScriptsPartial")
+        }
+    </div>
+}

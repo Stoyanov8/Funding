@@ -1,0 +1,9 @@
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Common\bin\Debug\netstandard2.0\Funding.Common.deps.json
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Common\bin\Debug\netstandard2.0\Funding.Common.dll
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Common\bin\Debug\netstandard2.0\Funding.Common.pdb
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Common\obj\Debug\netstandard2.0\Funding.Common.csproj.CoreCompileInputs.cache
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Common\obj\Debug\netstandard2.0\Funding.Common.AssemblyInfoInputs.cache
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Common\obj\Debug\netstandard2.0\Funding.Common.AssemblyInfo.cs
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Common\obj\Debug\netstandard2.0\Funding.Common.dll
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Common\obj\Debug\netstandard2.0\Funding.Common.pdb
+C:\Users\gstoy\Documents\Visual Studio 2017\Projects\ASP.Net\ASP.NET-Course.git\trunk\Funding\Funding.Common\obj\Debug\netstandard2.0\Funding.Common.csprojResolveAssemblyReference.cache
