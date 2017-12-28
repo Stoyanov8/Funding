@@ -6,6 +6,7 @@
     using Funding.Data.Models;
     using Funding.Services.Models.ProjectViewModels;
     using Funding.Services.Services;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
@@ -19,7 +20,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             // Act
             var result = await service.GetAllProjects(1);
@@ -38,7 +40,8 @@
             var startDate = new DateTime(2016, 10, 2);
             var endDate = new DateTime(2015, 10, 2);
 
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             // Act
             var result = await service.AddProject("Hello", "Description", "wwww.imageurl.com", 10, startDate, endDate, "spas", "1");
@@ -55,7 +58,8 @@
             var startDate = new DateTime(2018, 10, 2);
             var endDate = new DateTime(2015, 10, 2);
 
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             // Act
             var result = await service.AddProject("Hello", "Description", "wwww.imageurl.com", 10, startDate, endDate, "spas", "1");
@@ -71,8 +75,8 @@
             var db = DatabaseInitializer.InitializeForProjectService();
             var startDate = new DateTime(2018, 10, 2);
             var endDate = new DateTime(2019, 10, 2);
-
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             // Act
             var result = await service.AddProject("Hello", "Description", "wwww.imageurl.com", 10, startDate, endDate, null, "1");
@@ -87,7 +91,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             // Act
 
@@ -104,7 +109,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             //Act
             var result = await service.MakeDonation(1, "georgi", "nice project", 10);
@@ -118,8 +124,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
-
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
             //Act
             var result = await service.MakeDonation(110, "georgi", "nice project", 10);
             //Assert
@@ -132,8 +138,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
-
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
             //Act
             var result = await service.GetMyProjects(1, "georgi");
             //Assert
@@ -145,7 +151,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             //Act
             var result = await service.UserAlreadyDonated(1, "georgi");
@@ -158,8 +165,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
-
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
             //Act
             var result = await service.DeleteProject("georgi", 10);
             //Assert
@@ -172,7 +179,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             //Act
             var result = await service.DeleteProject("georgi", 1);
@@ -186,7 +194,8 @@
 
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             //Act
             var result = service.GetEditModel("georgi", 2);
@@ -201,7 +210,8 @@
             var startDate = new DateTime(2018, 10, 2);
             var endDate = new DateTime(2019, 10, 2);
 
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             // Act
             var result = await service.EditProject(1, "Hello", startDate, endDate, "Description", 10, "wwww.iamimagetrustme.com/realimage.jpg");
@@ -218,7 +228,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
 
             // Act
             var result = await service.GetFundedProjects(1, "georgi");
@@ -232,7 +243,8 @@
         {
             // Arrange
             var db = DatabaseInitializer.InitializeForProjectService();
-            var service = new ProjectService(db);
+            var manager = DatabaseInitializer.GetUserManager();
+            var service = new ProjectService(db, manager);
             var firstProject = await db.Projects.FirstOrDefaultAsync(x=> x.Id==1);
             // Act
             var result = service.IsImageUrl(firstProject.ImageUrl);

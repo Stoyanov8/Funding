@@ -1,7 +1,13 @@
-﻿@{
+﻿@model string
+@{
     ViewData["Title"] = "Funding";
 }
+
 <div class="buttonsHome">
+    <div class="greetings">
+        <p> @(DateTime.Now.Hour < 11 ? "Good morning" : "Greetings") @Model ! </p>
+        <p>You can :</p>
+    </div>
     <div>
         <a asp-action="Index" asp-controller="Project" class="btn btn-info" id="exploreHome">
             Explore our projects

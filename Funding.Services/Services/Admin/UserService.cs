@@ -21,7 +21,7 @@
             this.db = db;
         }
 
-        public async Task<AdminUsersListingViewModel> ListAll(int page = 1)
+        public async Task<AdminUsersListingServiceModel> ListAll(int page = 1)
         {
             List<UserListingViewModel> users = null;
 
@@ -38,7 +38,7 @@
                 .Where(x => x.Email != Account.AdminName)
                 .ProjectTo<UserListingViewModel>().ToListAsync();
 
-            return new AdminUsersListingViewModel
+            return new AdminUsersListingServiceModel
             {
                 Users = users.OrderBy(x => x.isDeleted).Skip((page - 1) * Page.UsersSize).Take(Page.UsersSize).ToList(),
                 Page = page,

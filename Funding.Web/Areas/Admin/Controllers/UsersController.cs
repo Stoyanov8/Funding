@@ -4,6 +4,7 @@
     using Funding.Data.Models;
     using Funding.Services.Interfaces.Admin;
     using Funding.Services.Models.AdminViewModels;
+    using Funding.Web.Areas.Admin.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,13 @@
 
         public async Task<IActionResult> All(int page = 1)
         {
-            var model = await service.ListAll(page);
+            var modelFromService = await service.ListAll(page);
+
+            var model = new AdminUsersListingViewModel
+            {
+                UsersAndPages = modelFromService
+                
+            };
             return this.View(model);
         }
 
@@ -77,7 +84,7 @@
 
             await this.userManager.AddToRoleAsync(user, role);
 
-            this.TempData[UserConst.TempDataResult] = string.Format(UserConst.AddedInRole,user.UserName,role);
+            this.TempData[UserConst.TempDataResult] = string.Format(UserConst.AddedInRole, user.UserName, role);
             return this.RedirectToAction(nameof(All));
         }
 

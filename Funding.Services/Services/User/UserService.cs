@@ -22,5 +22,11 @@
             var result = await this.db.Users.SingleOrDefaultAsync(x => x.Email == email);
             return result.isDeleted;
         }
+        public async Task<string> GetUserFullName(string email)
+        {
+            var user = await this.db.Users.SingleOrDefaultAsync(x => x.Email == email);
+
+            return user.FirstName + " " + user.LastName;
+        }
     }
 }

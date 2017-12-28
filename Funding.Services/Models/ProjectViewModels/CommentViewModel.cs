@@ -8,6 +8,7 @@
     public class CommentViewModel : IMapFrom<Comment>, IHaveCustomMapping
     {
         public int Id { get; set; }
+
         public string Content { get; set; }
 
         public string User { get; set; }       

@@ -26,6 +26,7 @@
         public const string TempDataDeletedComment = "commentDelete";
         public const string DeletedCommentSuccess = "Comment successfully deleted";
         public const string DeletedCommentFailed = "You do not have permission to do that!";
+        public const string NoResults ="Sorry we couldn't find any match";
 
         public const string SuccesfullyEdited = "Project succesfully edited";
         public const string AlreadyDonated = "You've already donated for this project !";
@@ -46,6 +47,7 @@
         public const string TempDataDonated = "message1";
         public const string TempDataMessage = "message";
         public const string TempDataAddedProject = "addedProject";
+        public const string TempDataNoResults = "noResult";
 
         public const int MaxLenght = 2400;
         public const int ImageUrlMinLenght = 5;

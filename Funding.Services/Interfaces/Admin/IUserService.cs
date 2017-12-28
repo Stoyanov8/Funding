@@ -5,7 +5,7 @@
 
     public interface IUserService
     {
-        Task<AdminUsersListingViewModel> ListAll(int page = 1);
+        Task<AdminUsersListingServiceModel> ListAll(int page = 1);
 
         Task<UserEditViewModel> GetUserById(string userId);
 

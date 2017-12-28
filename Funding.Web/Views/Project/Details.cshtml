@@ -13,8 +13,6 @@
 }
 
 @inject IProjectService service
-@await Html.PartialAsync("_BackButton")
-
 <h3 class="text-danger">@TempData[ProjectConst.TempDataSorry]</h3>
 <h3 class="text-success">@TempData[ProjectConst.TempDataDonated]</h3>
 <h3 class="text-info">@TempData[ProjectConst.TempDataDeletedComment]</h3>

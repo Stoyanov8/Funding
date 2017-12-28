@@ -20,7 +20,7 @@
             this.db = db;
         }
 
-        public async Task<AdminProjectListingViewModel> ListAll(int page = 1)
+        public async Task<AdminProjectsServiceModel> ListAll(int page = 1)
         {
             List<ProjectsListingViewModel> projects = null;
 
@@ -40,7 +40,7 @@
                 .ProjectTo<ProjectsListingViewModel>()
                 .ToListAsync();
 
-            return new AdminProjectListingViewModel
+            return new AdminProjectsServiceModel
             {
                 Projects = projects.OrderBy(x => x.isApproved ? 1 : 0).Skip((page - 1) * Page.ProjectSize).Take(Page.ProjectSize).ToList(),
                 Page = page,

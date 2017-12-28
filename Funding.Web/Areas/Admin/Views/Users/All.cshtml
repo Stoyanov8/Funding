@@ -1,11 +1,11 @@
-﻿@model Funding.Services.Models.AdminViewModels.AdminUsersListingViewModel
+﻿@model AdminUsersListingViewModel
 @{
     ViewData["Title"] = "Users";
 
 }@await Html.PartialAsync("_AdminButtons")
 <h2 style="padding-right:500px;">All registered users</h2>
 
-@if (Model.Users.Count() == 0)
+@if (Model.UsersAndPages.Users.Count() == 0)
 {
     <h2 class="text-warning">No users registered </h2>
 }
@@ -24,7 +24,7 @@ else
                 </tr>
             </thead>
             <tbody>
-                @foreach (var user in Model.Users)
+                @foreach (var user in Model.UsersAndPages.Users)
                 {
                     <tr class="table-active">
                         <td>@user.FirstName</td>
@@ -60,19 +60,19 @@ else
     <div class="row">
         <ul class="pagination">
             <li class="page-item">
-                <a @Model.Previous asp-controller="Users" asp-action="All" asp-route-page="@(Model.Page-1)" aria-label="Previous">
+                <a @Model.UsersAndPages.Previous asp-controller="Users" asp-action="All" asp-route-page="@(Model.UsersAndPages.Page-1)" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
-            @for (int i = 1; i <= Model.NumberOfPages; i++)
+            @for (int i = 1; i <= Model.UsersAndPages.NumberOfPages; i++)
                 {
-                <li class="page-item @(Model.Page == i ? "active" : string.Empty)">
-                    <a class="page-link @(Model.Page == i ? "disabled" : string.Empty)" asp-controller="Users" asp-action="All" asp-route-page="@i">@i</a>
+                <li class="page-item @(Model.UsersAndPages.Page == i ? "active" : string.Empty)">
+                    <a class="page-link @(Model.UsersAndPages.Page == i ? "disabled" : string.Empty)" asp-controller="Users" asp-action="All" asp-route-page="@i">@i</a>
                 </li>
             }
             <li class="page-item">
-                <a @Model.Next asp-controller="Users" asp-action="All" asp-route-page="@(Model.Page+1)" aria-label="Next">
+                <a @Model.UsersAndPages.Next asp-controller="Users" asp-action="All" asp-route-page="@(Model.UsersAndPages.Page+1)" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>

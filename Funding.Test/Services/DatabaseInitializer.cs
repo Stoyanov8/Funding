@@ -107,5 +107,8 @@ namespace Funding.Test.Services
 
             return db;
         }
+
+        public static FakeUserManager GetUserManager()
+            => new FakeUserManager();
     }
 }

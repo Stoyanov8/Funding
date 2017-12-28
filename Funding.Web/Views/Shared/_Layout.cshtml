@@ -21,7 +21,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><img border="0" alt="W3Schools" src="~/images/f2.jpg" width="50" height="35"></a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><img border="0" alt="img" src="~/images/f2.jpg" width="50" height="35"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <form class="navbar-form searchBar" role="search" asp-controller="Project" asp-action="Search">
@@ -30,6 +30,12 @@
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
+                    </div>
+                    <div>
+                        <label class="checkbox-inline ckboxLabel">
+                            <input id="Tag" type="checkbox" value="true" name="tag" />Include tags
+                            <input type="hidden" value="false" name="tag" />
+                        </label>
                     </div>
                 </form>
                 @await Html.PartialAsync("_LoginPartial")

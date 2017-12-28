@@ -33,6 +33,7 @@
         public const string TempDataError = "error";
         public const string Success = "Successfully";
         public const string GetUnreadMessages = "GetMessages";
+        public const string Guest = "Guest";
 
     }
 }

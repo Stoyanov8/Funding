@@ -237,10 +237,24 @@
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Search(string searchTerm)
+        public async Task<IActionResult> Search(string searchTerm, bool name, bool tag, int page = 1)
         {
-            var result = await this.service.GetSearchResults(searchTerm);
+            ProjectsSearchViewModel result = null;
 
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                this.TempData[ProjectConst.TempDataNoResults] = ProjectConst.NoResults;
+                return this.RedirectToAction(nameof(Index), new { projectId = 1 });
+            }
+            else
+            {
+                result = await this.service.GetSearchResults(searchTerm, tag, page);
+            }
+            if(result == null)
+            {
+                this.TempData[ProjectConst.TempDataNoResults] = ProjectConst.NoResults;
+                return this.RedirectToAction(nameof(Index), new { projectId = 1 });
+            }
             return this.View(result);
         }
     }

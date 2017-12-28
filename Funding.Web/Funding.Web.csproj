@@ -33,9 +33,4 @@
     <None Include="wwwroot\images\no.jpg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\ProjectAdmin\Models\" />
-  </ItemGroup>
-
 </Project>

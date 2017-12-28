@@ -412,9 +412,69 @@ namespace Funding.Services.Services
 
         public async Task<bool> ProjectExist(int projectId) => await this.db.Projects.AnyAsync(x => x.Id == projectId);
 
-        public Task<string> GetSearchResults(string searchTerm)
+        public async Task<ProjectsSearchViewModel> GetSearchResults(string searchTerm, bool tag, int page)
         {
-            throw new NotImplementedException();
+            List<ProjectsHome> projects = new List<ProjectsHome>();
+
+            if (page < 1)
+            {
+                page = 1;
+            }
+
+            if (tag)
+            {
+                var tagProjects = await this.db
+                    .ProjectTags
+                    .Where(x => x.Tag.Name.ToLower()
+                    .Contains(searchTerm.ToLower()))
+                    .Select(x => x.Project)
+                    .ProjectTo<ProjectsHome>()
+                    .ToListAsync();
+
+                var nameProjects = await this.db
+                  .Projects
+                  .Where(x => x.Name.ToLower()
+                  .Contains(searchTerm.ToLower()))
+                  .ProjectTo<ProjectsHome>()
+                  .ToListAsync();
+
+                projects.AddRange(tagProjects);
+
+                projects.AddRange(nameProjects);
+
+                projects = projects.GroupBy(x => x.Id).Select(group => group.First()).ToList();
+            }
+
+            else
+            {
+                projects = await this.db.Projects
+                  .Where(x => x.Name.ToLower()
+                  .Contains(searchTerm.ToLower()))
+                  .ProjectTo<ProjectsHome>()
+                  .ToListAsync();
+            }
+
+            if (projects == null)
+            {
+                return null;
+            }
+
+            int totalProjects = projects.Count();
+
+            int numberOfPages = (int)Math.Ceiling((double)totalProjects / Page.UsersSize);
+
+            if (page > numberOfPages)
+            {
+                page = 1;
+            }
+            return new ProjectsSearchViewModel
+            {
+                Projects = projects
+                .OrderByDescending(x => x.Id).Skip((page - 1) * Page.ProjectHomeSize)
+                .Take(Page.ProjectHomeSize).ToList(),
+                Page = page,
+                NumberOfPages = numberOfPages
+            };
         }
     }
 }

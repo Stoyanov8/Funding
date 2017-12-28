@@ -1,28 +1,30 @@
-﻿using Funding.Web.Models;
+﻿using Funding.Common.Constants;
+using Funding.Services.Interfaces;
+using Funding.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Funding.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IUserService service;
+
+        public HomeController(IUserService service)
         {
-            return View();
+            this.service = service;
         }
-
-        public IActionResult About()
+        public async Task<IActionResult> Index()
         {
-            ViewData["Message"] = "Your application description page.";
+            var email = this.User.Identity.Name;
+            string model = UserConst.Guest;
 
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            if (email != null)
+            {
+                model = await service.GetUserFullName(email);
+            }
+            return this.View(nameof(Index),model);
         }
 
         public IActionResult Error()

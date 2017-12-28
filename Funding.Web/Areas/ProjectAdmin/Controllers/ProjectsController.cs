@@ -1,5 +1,6 @@
 ﻿using Funding.Common.Constants;
 using Funding.Services.Interfaces.Admin;
+using Funding.Web.Areas.ProjectAdmin.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -16,7 +17,11 @@ namespace Funding.Web.Areas.ProjectAdmin.Controllers
 
         public async Task<IActionResult> All(int page = 1)
         {
-            var model = await service.ListAll(page);
+            var modelFromService = await service.ListAll(page);
+            var model = new AdminProjectListingViewModel()
+            {
+                ProjectsAndPages = modelFromService
+            };
             return this.View(model);
         }
 

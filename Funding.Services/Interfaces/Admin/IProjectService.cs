@@ -5,7 +5,7 @@
 
     public interface IProjectService
     {
-        Task<AdminProjectListingViewModel> ListAll(int page = 1);
+        Task<AdminProjectsServiceModel> ListAll(int page = 1);
 
         Task<string> DoNotApprove(int projectId);
 

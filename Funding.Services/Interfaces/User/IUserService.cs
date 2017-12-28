@@ -7,5 +7,7 @@
         Task<bool> EmailExist(string email);
 
         Task<bool> isDeleted(string email);
+
+        Task<string> GetUserFullName(string email);
     }
 }

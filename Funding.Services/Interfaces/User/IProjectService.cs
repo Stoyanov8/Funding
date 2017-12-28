@@ -46,6 +46,6 @@
 
         bool IsImageUrl(string URL);
 
-        Task<string> GetSearchResults(string searchTerm);
+        Task<ProjectsSearchViewModel> GetSearchResults(string searchTerm,bool tag,int page);
     }
 }
