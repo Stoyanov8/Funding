@@ -250,7 +250,8 @@
             {
                 result = await this.service.GetSearchResults(searchTerm, tag, page);
             }
-            if(result == null)
+
+            if(result.Projects.Count == 0)
             {
                 this.TempData[ProjectConst.TempDataNoResults] = ProjectConst.NoResults;
                 return this.RedirectToAction(nameof(Index), new { projectId = 1 });

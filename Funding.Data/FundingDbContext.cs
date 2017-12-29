@@ -24,6 +24,8 @@
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<SearchHistory> Searches { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.UserBuilder();

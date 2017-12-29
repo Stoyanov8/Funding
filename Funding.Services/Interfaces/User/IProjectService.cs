@@ -40,12 +40,14 @@
 
         Task<ProjectsFundedViewModel> GetFundedProjects(int page, string email);
 
-        Task<bool> DeleteComment(int Id,string userName);
+        Task<bool> DeleteComment(int Id, string userName);
 
         Task<bool> AddComment(string comment, int projectId, string userName);
 
         bool IsImageUrl(string URL);
 
-        Task<ProjectsSearchViewModel> GetSearchResults(string searchTerm,bool tag,int page);
+        Task<ProjectsSearchViewModel> GetSearchResults(string searchTerm, bool tag, int page);
+
+        Task<string[]> MostPopularSearches();
     }
 }

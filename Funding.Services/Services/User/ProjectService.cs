@@ -398,19 +398,7 @@ namespace Funding.Services.Services
             }
             return false;
         }
-        private async Task<Comment> GetCommentById(int id)
-            => await this.db.Comments.SingleOrDefaultAsync(x => x.Id == id);
 
-        private async Task<bool> UsersComment(int commentId, string userId)
-            => await this.db.Comments.AnyAsync(x => x.UserId == userId && x.Id == commentId);
-
-        private async Task<User> GetUserByName(string name)
-          => await this.db.Users.SingleOrDefaultAsync(x => x.UserName == name);
-
-        private async Task<Project> GetProject(int projectId)
-            => await this.db.Projects.SingleOrDefaultAsync(x => x.Id == projectId);
-
-        public async Task<bool> ProjectExist(int projectId) => await this.db.Projects.AnyAsync(x => x.Id == projectId);
 
         public async Task<ProjectsSearchViewModel> GetSearchResults(string searchTerm, bool tag, int page)
         {
@@ -459,6 +447,8 @@ namespace Funding.Services.Services
                 return null;
             }
 
+            await this.AddSearchInDatabase(searchTerm);
+
             int totalProjects = projects.Count();
 
             int numberOfPages = (int)Math.Ceiling((double)totalProjects / Page.UsersSize);
@@ -476,5 +466,41 @@ namespace Funding.Services.Services
                 NumberOfPages = numberOfPages
             };
         }
+
+        private async Task AddSearchInDatabase(string searchTerm)
+        {
+            SearchHistory search = await this.db.Searches.SingleOrDefaultAsync(x => x.Name == searchTerm);
+
+            if (search == null)
+            {
+                await this.db.AddAsync(new SearchHistory
+                {
+                    Name = searchTerm,
+                    SearchCount = 1
+                });
+            }
+            else
+            {
+                search.SearchCount++;
+            }
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task<string[]> MostPopularSearches()       
+            =>  await this.db.Searches.OrderByDescending(x => x.SearchCount).Select(x=> x.Name).ToArrayAsync();
+       
+        private async Task<Comment> GetCommentById(int id)
+          => await this.db.Comments.SingleOrDefaultAsync(x => x.Id == id);
+
+        private async Task<bool> UsersComment(int commentId, string userId)
+            => await this.db.Comments.AnyAsync(x => x.UserId == userId && x.Id == commentId);
+
+        private async Task<User> GetUserByName(string name)
+          => await this.db.Users.SingleOrDefaultAsync(x => x.UserName == name);
+
+        private async Task<Project> GetProject(int projectId)
+            => await this.db.Projects.SingleOrDefaultAsync(x => x.Id == projectId);
+
+        public async Task<bool> ProjectExist(int projectId) => await this.db.Projects.AnyAsync(x => x.Id == projectId);
     }
 }
