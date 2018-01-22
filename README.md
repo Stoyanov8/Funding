@@ -1,2 +1,1 @@
-# Funding-Retake
-Funding Retake SoftUni 08.01.2018
+Project For Software Univeristy.It is about funding projects.
